@@ -1,37 +1,31 @@
-local gl = require("gl")
-
 function render(frame_count, width, height, hw_render)
-    -- Clear screen
-    gl.clear(0.3, 0.4, 0.5, 1.0)
-    gl.viewport(width, height)
-    gl.bind_framebuffer(hw_render)
+   gl = require("gl")
+   gl.bind_framebuffer(hw_render)
+   gl.clear(0.3, 0.4, 0.5, 1.0)
+   gl.viewport(width, height)
 
-    -- Setup program
-    gl.use_program()
+   gl.use_program()
+   local angle = frame_count / 100.0
+   local cos_angle = math.cos(angle)
+   local sin_angle = math.sin(angle)
+   local mvp = {
+      cos_angle, -sin_angle, 0, 0,
+      sin_angle, cos_angle, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+   }
+   gl.draw(mvp)
+   local cos_angle2 = cos_angle * 0.5
+   local sin_angle2 = sin_angle * 0.5
+   local mvp2 = {
+      cos_angle2, -sin_angle2, 0, 0,
+      sin_angle2, cos_angle2, 0, 0,
+      0, 0, 1, 0,
+      0.4, 0.4, 0.2, 1
+   }
+   gl.draw(mvp2)
+   gl.cleanup()
 
-    -- First quad
-    local angle = frame_count / 100.0
-    local cos_angle = math.cos(angle)
-    local sin_angle = math.sin(angle)
-    local mvp = {
-        cos_angle, -sin_angle, 0, 0,
-        sin_angle, cos_angle, 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    }
-    gl.draw(mvp)
-
-    -- Second quad
-    cos_angle = cos_angle * 0.5
-    sin_angle = sin_angle * 0.5
-    local mvp2 = {
-        cos_angle, -sin_angle, 0, 0,
-        sin_angle, cos_angle, 0, 0,
-        0, 0, 1, 0,
-        0.4, 0.4, 0.2, 1
-    }
-    gl.draw(mvp2)
-
-    -- Cleanup
-    gl.cleanup()
+   gl.draw_test_quad(10, 10)
+   gl.draw_text(10, 10, "Frame: " .. frame_count)
 end

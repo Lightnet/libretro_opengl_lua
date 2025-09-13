@@ -7,6 +7,8 @@
 
   There is limited how lua script is used. Still depend how dev make it possible if code correctly.
 
+  This is just a prototype test build.
+
 # Retroarch Guide:
   Note it need to be in cores folder for to work. As well the render.lua script file to another folder.
 ```
@@ -21,3 +23,4 @@ libretro_opengl_lua.dll
 
 # Credits:
 - https://github.com/libretro/libretro-samples/tree/master/video/opengl/libretro_test_gl_shaders
+- https://kenney.nl/assets/kenney-fonts

@@ -84,8 +84,12 @@ set(LIB_NAME libretro_opengl_lua_c)
 add_library(${LIB_NAME} SHARED 
     ${libretro-common_SOURCE_DIR}/glsym/rglgen.c
     ${libretro-common_SOURCE_DIR}/glsym/glsym_gl.c
+
     src/module_gl.c
     src/lib.c
+
+    # src/lib_strip_font.c
+
 )
 
 # Set include directories
